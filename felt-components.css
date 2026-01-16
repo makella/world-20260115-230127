@@ -1,0 +1,536 @@
+/**
+ * Felt Components Library
+ * A professional component library for Felt map applications
+ * Inspired by Airship, Linear, and modern design systems
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ========================================
+   DESIGN TOKENS
+   ======================================== */
+
+:root {
+    /* Colors - Dark Theme */
+    --felt-bg-primary: #0a0a0a;
+    --felt-bg-secondary: #141414;
+    --felt-bg-elevated: #1f1f1f;
+    --felt-bg-hover: #252525;
+    --felt-bg-active: #2a2a2a;
+
+    --felt-text-primary: #fafafa;
+    --felt-text-secondary: #a1a1a1;
+    --felt-text-tertiary: #6b6b6b;
+    --felt-text-muted: #4a4a4a;
+
+    --felt-border-subtle: rgba(255, 255, 255, 0.06);
+    --felt-border-medium: rgba(255, 255, 255, 0.10);
+    --felt-border-strong: rgba(255, 255, 255, 0.15);
+
+    /* Accent Colors */
+    --felt-accent: #2563eb;
+    --felt-accent-hover: #1d4ed8;
+    --felt-accent-light: rgba(37, 99, 235, 0.12);
+    --felt-accent-glow: rgba(37, 99, 235, 0.3);
+
+    /* Semantic Colors */
+    --felt-success: #22c55e;
+    --felt-success-light: rgba(34, 197, 94, 0.12);
+    --felt-warning: #f59e0b;
+    --felt-warning-light: rgba(245, 158, 11, 0.12);
+    --felt-error: #ef4444;
+    --felt-error-light: rgba(239, 68, 68, 0.12);
+    --felt-info: #3b82f6;
+    --felt-info-light: rgba(59, 130, 246, 0.12);
+
+    /* Shadows */
+    --felt-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --felt-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --felt-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5);
+    --felt-shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.6);
+    --felt-shadow-glow: 0 0 32px var(--felt-accent-glow);
+
+    /* Typography */
+    --felt-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --felt-font-mono: ui-monospace, 'SF Mono', Monaco, monospace;
+
+    /* Spacing */
+    --felt-space-1: 0.25rem;    /* 4px */
+    --felt-space-2: 0.5rem;     /* 8px */
+    --felt-space-3: 0.75rem;    /* 12px */
+    --felt-space-4: 1rem;       /* 16px */
+    --felt-space-5: 1.25rem;    /* 20px */
+    --felt-space-6: 1.5rem;     /* 24px */
+    --felt-space-8: 2rem;       /* 32px */
+    --felt-space-10: 2.5rem;    /* 40px */
+    --felt-space-12: 3rem;      /* 48px */
+    --felt-space-16: 4rem;      /* 64px */
+
+    /* Radius */
+    --felt-radius-sm: 6px;
+    --felt-radius-md: 10px;
+    --felt-radius-lg: 14px;
+    --felt-radius-xl: 20px;
+    --felt-radius-full: 9999px;
+
+    /* Animation */
+    --felt-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --felt-duration-fast: 150ms;
+    --felt-duration-base: 250ms;
+    --felt-duration-slow: 350ms;
+
+    /* Z-index Scale */
+    --felt-z-dropdown: 1000;
+    --felt-z-sticky: 1020;
+    --felt-z-fixed: 1030;
+    --felt-z-modal-backdrop: 1040;
+    --felt-z-modal: 1050;
+    --felt-z-popover: 1060;
+    --felt-z-tooltip: 1070;
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+.felt-app {
+    font-family: var(--felt-font-sans);
+    color: var(--felt-text-primary);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   LAYOUT COMPONENTS
+   ======================================== */
+
+/* Container */
+.felt-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--felt-space-6);
+}
+
+/* Panel */
+.felt-panel {
+    background: var(--felt-bg-elevated);
+    border: 1px solid var(--felt-border-subtle);
+    border-radius: var(--felt-radius-lg);
+    padding: var(--felt-space-6);
+    box-shadow: var(--felt-shadow-sm);
+    transition: all var(--felt-duration-base) var(--felt-ease);
+}
+
+.felt-panel:hover {
+    border-color: var(--felt-border-medium);
+    box-shadow: var(--felt-shadow-md);
+}
+
+.felt-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--felt-space-5);
+    padding-bottom: var(--felt-space-4);
+    border-bottom: 1px solid var(--felt-border-subtle);
+}
+
+.felt-panel-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--felt-text-secondary);
+}
+
+.felt-panel-body {
+    color: var(--felt-text-primary);
+}
+
+/* Card */
+.felt-card {
+    background: var(--felt-bg-elevated);
+    border: 1px solid var(--felt-border-subtle);
+    border-radius: var(--felt-radius-md);
+    padding: var(--felt-space-5);
+    transition: all var(--felt-duration-fast) var(--felt-ease);
+    cursor: pointer;
+}
+
+.felt-card:hover {
+    border-color: var(--felt-border-medium);
+    transform: translateY(-2px);
+    box-shadow: var(--felt-shadow-md);
+}
+
+.felt-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--felt-space-2);
+    color: var(--felt-text-primary);
+}
+
+.felt-card-subtitle {
+    font-size: 0.875rem;
+    color: var(--felt-text-secondary);
+    margin-bottom: var(--felt-space-4);
+}
+
+.felt-card-content {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--felt-text-primary);
+}
+
+/* Stat Card */
+.felt-stat-card {
+    background: var(--felt-bg-elevated);
+    border: 1px solid var(--felt-border-subtle);
+    border-radius: var(--felt-radius-lg);
+    padding: var(--felt-space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--felt-space-2);
+}
+
+.felt-stat-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--felt-text-tertiary);
+}
+
+.felt-stat-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--felt-text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.felt-stat-delta {
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--felt-space-1);
+}
+
+.felt-stat-delta.positive {
+    color: var(--felt-success);
+}
+
+.felt-stat-delta.negative {
+    color: var(--felt-error);
+}
+
+/* ========================================
+   FORM COMPONENTS
+   ======================================== */
+
+/* Input */
+.felt-input {
+    width: 100%;
+    padding: var(--felt-space-3) var(--felt-space-4);
+    background: var(--felt-bg-hover);
+    border: 1px solid var(--felt-border-medium);
+    border-radius: var(--felt-radius-md);
+    color: var(--felt-text-primary);
+    font-size: 0.9375rem;
+    font-family: var(--felt-font-sans);
+    outline: none;
+    transition: all var(--felt-duration-fast) var(--felt-ease);
+}
+
+.felt-input::placeholder {
+    color: var(--felt-text-tertiary);
+}
+
+.felt-input:hover {
+    border-color: var(--felt-border-strong);
+    background: var(--felt-bg-active);
+}
+
+.felt-input:focus {
+    border-color: var(--felt-accent);
+    background: var(--felt-bg-elevated);
+    box-shadow: 0 0 0 3px var(--felt-accent-light);
+}
+
+/* Select */
+.felt-select {
+    width: 100%;
+    padding: var(--felt-space-3) var(--felt-space-4);
+    background: var(--felt-bg-hover);
+    border: 1px solid var(--felt-border-medium);
+    border-radius: var(--felt-radius-md);
+    color: var(--felt-text-primary);
+    font-size: 0.9375rem;
+    font-family: var(--felt-font-sans);
+    cursor: pointer;
+    outline: none;
+    transition: all var(--felt-duration-fast) var(--felt-ease);
+}
+
+.felt-select:hover {
+    border-color: var(--felt-border-strong);
+    background: var(--felt-bg-active);
+}
+
+.felt-select:focus {
+    border-color: var(--felt-accent);
+    box-shadow: 0 0 0 3px var(--felt-accent-light);
+}
+
+/* Range Slider */
+.felt-slider {
+    width: 100%;
+    height: 6px;
+    background: var(--felt-bg-hover);
+    border-radius: var(--felt-radius-full);
+    outline: none;
+    cursor: pointer;
+    transition: background var(--felt-duration-fast);
+}
+
+.felt-slider:hover {
+    background: var(--felt-bg-active);
+}
+
+.felt-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--felt-accent);
+    border: 3px solid var(--felt-bg-elevated);
+    border-radius: var(--felt-radius-full);
+    cursor: grab;
+    box-shadow: var(--felt-shadow-md), var(--felt-shadow-glow);
+    transition: all var(--felt-duration-fast) var(--felt-ease);
+}
+
+.felt-slider::-webkit-slider-thumb:hover {
+    background: var(--felt-accent-hover);
+    transform: scale(1.1);
+}
+
+.felt-slider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+/* Button */
+.felt-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--felt-space-2);
+    padding: var(--felt-space-3) var(--felt-space-5);
+    background: var(--felt-accent);
+    color: white;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: var(--felt-font-sans);
+    border: none;
+    border-radius: var(--felt-radius-md);
+    cursor: pointer;
+    outline: none;
+    transition: all var(--felt-duration-fast) var(--felt-ease);
+    white-space: nowrap;
+}
+
+.felt-btn:hover {
+    background: var(--felt-accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--felt-shadow-md);
+}
+
+.felt-btn:active {
+    transform: translateY(0);
+}
+
+.felt-btn:focus-visible {
+    box-shadow: 0 0 0 3px var(--felt-accent-light);
+}
+
+/* Button Variants */
+.felt-btn-secondary {
+    background: var(--felt-bg-elevated);
+    color: var(--felt-text-primary);
+    border: 1px solid var(--felt-border-medium);
+}
+
+.felt-btn-secondary:hover {
+    background: var(--felt-bg-hover);
+    border-color: var(--felt-border-strong);
+}
+
+.felt-btn-ghost {
+    background: transparent;
+    color: var(--felt-text-secondary);
+}
+
+.felt-btn-ghost:hover {
+    background: var(--felt-bg-hover);
+    color: var(--felt-text-primary);
+}
+
+/* Button Sizes */
+.felt-btn-sm {
+    padding: var(--felt-space-2) var(--felt-space-4);
+    font-size: 0.875rem;
+}
+
+.felt-btn-lg {
+    padding: var(--felt-space-4) var(--felt-space-6);
+    font-size: 1rem;
+}
+
+/* ========================================
+   DATA DISPLAY COMPONENTS
+   ======================================== */
+
+/* Legend */
+.felt-legend {
+    background: var(--felt-bg-elevated);
+    border: 1px solid var(--felt-border-subtle);
+    border-radius: var(--felt-radius-md);
+    padding: var(--felt-space-4);
+}
+
+.felt-legend-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--felt-text-tertiary);
+    margin-bottom: var(--felt-space-4);
+}
+
+.felt-legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--felt-space-3);
+    padding: var(--felt-space-2) 0;
+}
+
+.felt-legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: var(--felt-radius-sm);
+    flex-shrink: 0;
+}
+
+.felt-legend-label {
+    font-size: 0.875rem;
+    color: var(--felt-text-primary);
+}
+
+/* Badge */
+.felt-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--felt-space-1) var(--felt-space-3);
+    background: var(--felt-accent-light);
+    color: var(--felt-accent);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border-radius: var(--felt-radius-full);
+    font-variant-numeric: tabular-nums;
+}
+
+.felt-badge-success {
+    background: var(--felt-success-light);
+    color: var(--felt-success);
+}
+
+.felt-badge-warning {
+    background: var(--felt-warning-light);
+    color: var(--felt-warning);
+}
+
+.felt-badge-error {
+    background: var(--felt-error-light);
+    color: var(--felt-error);
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Spacing */
+.felt-mt-1 { margin-top: var(--felt-space-1); }
+.felt-mt-2 { margin-top: var(--felt-space-2); }
+.felt-mt-3 { margin-top: var(--felt-space-3); }
+.felt-mt-4 { margin-top: var(--felt-space-4); }
+.felt-mt-6 { margin-top: var(--felt-space-6); }
+.felt-mt-8 { margin-top: var(--felt-space-8); }
+
+.felt-mb-1 { margin-bottom: var(--felt-space-1); }
+.felt-mb-2 { margin-bottom: var(--felt-space-2); }
+.felt-mb-3 { margin-bottom: var(--felt-space-3); }
+.felt-mb-4 { margin-bottom: var(--felt-space-4); }
+.felt-mb-6 { margin-bottom: var(--felt-space-6); }
+.felt-mb-8 { margin-bottom: var(--felt-space-8); }
+
+.felt-gap-2 { gap: var(--felt-space-2); }
+.felt-gap-3 { gap: var(--felt-space-3); }
+.felt-gap-4 { gap: var(--felt-space-4); }
+.felt-gap-6 { gap: var(--felt-space-6); }
+
+/* Flex */
+.felt-flex { display: flex; }
+.felt-flex-col { flex-direction: column; }
+.felt-items-center { align-items: center; }
+.felt-justify-between { justify-content: space-between; }
+.felt-flex-1 { flex: 1; }
+
+/* Text */
+.felt-text-sm { font-size: 0.875rem; }
+.felt-text-base { font-size: 0.9375rem; }
+.felt-text-lg { font-size: 1.125rem; }
+.felt-font-medium { font-weight: 500; }
+.felt-font-semibold { font-weight: 600; }
+.felt-font-bold { font-weight: 700; }
+
+/* Colors */
+.felt-text-primary { color: var(--felt-text-primary); }
+.felt-text-secondary { color: var(--felt-text-secondary); }
+.felt-text-tertiary { color: var(--felt-text-tertiary); }
+.felt-text-accent { color: var(--felt-accent); }
+.felt-text-success { color: var(--felt-success); }
+.felt-text-warning { color: var(--felt-warning); }
+.felt-text-error { color: var(--felt-error); }
+
+/* Animation */
+@keyframes felt-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes felt-slide-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes felt-slide-down {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.felt-animate-fade-in {
+    animation: felt-fade-in var(--felt-duration-base) var(--felt-ease);
+}
+
+.felt-animate-slide-up {
+    animation: felt-slide-up var(--felt-duration-base) var(--felt-ease);
+}
+
+.felt-animate-slide-down {
+    animation: felt-slide-down var(--felt-duration-base) var(--felt-ease);
+}
