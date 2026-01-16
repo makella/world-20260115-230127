@@ -1,0 +1,11 @@
+{
+  "name": "felt-dashboard",
+  "version": "1.0.0",
+  "description": "Interactive world with professional cartographic styling",
+  "scripts": {
+    "start": "python -m http.server 8000"
+  },
+  "keywords": ["felt", "gis", "maps"],
+  "author": "",
+  "license": "MIT"
+}
