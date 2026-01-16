@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>world</title>
+    <link rel="stylesheet" href="felt-components.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .layout-dual-panel {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            height: 100vh;
+            background: var(--felt-bg-primary);
+        }
+
+        .layout-header {
+            padding: var(--felt-space-6) var(--felt-space-8);
+            background: var(--felt-bg-secondary);
+            border-bottom: 1px solid var(--felt-border-subtle);
+        }
+
+        .layout-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--felt-space-2);
+            color: var(--felt-text-primary);
+        }
+
+        .layout-header p {
+            font-size: 0.9375rem;
+            color: var(--felt-text-secondary);
+            margin: 0;
+        }
+
+        .layout-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--felt-space-4);
+            padding: var(--felt-space-4);
+            overflow: hidden;
+        }
+
+        .map-panel {
+            position: relative;
+            background: var(--felt-bg-elevated);
+            border: 1px solid var(--felt-border-subtle);
+            border-radius: var(--felt-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--felt-shadow-md);
+        }
+
+        .map-panel-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: var(--felt-space-4);
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0) 100%);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .map-panel-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--felt-text-primary);
+            margin: 0;
+            pointer-events: auto;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-controls {
+            position: absolute;
+            bottom: var(--felt-space-4);
+            left: var(--felt-space-4);
+            right: var(--felt-space-4);
+            display: flex;
+            gap: var(--felt-space-2);
+            z-index: 100;
+        }
+
+        .map-control-button {
+            flex: 1;
+            background: rgba(31, 31, 31, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--felt-border-subtle);
+            border-radius: var(--felt-radius-md);
+            padding: var(--felt-space-2) var(--felt-space-3);
+            color: var(--felt-text-primary);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--felt-duration-fast) var(--felt-ease);
+        }
+
+        .map-control-button:hover {
+            background: rgba(37, 99, 235, 0.2);
+            border-color: var(--felt-accent);
+        }
+
+        .sync-badge {
+            position: absolute;
+            top: var(--felt-space-4);
+            right: var(--felt-space-4);
+            background: var(--felt-accent);
+            color: white;
+            padding: var(--felt-space-1) var(--felt-space-3);
+            border-radius: var(--felt-radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 100;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .layout-content {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .layout-header {
+                padding: var(--felt-space-4);
+            }
+
+            .layout-header h1 {
+                font-size: 1.25rem;
+            }
+
+            .map-panel-header {
+                padding: var(--felt-space-3);
+            }
+
+            .map-panel-title {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body class="felt-app">
+    <div class="layout-dual-panel">
+        <header class="layout-header">
+            <h1>world</h1>
+            <p>Interactive world with professional cartographic styling</p>
+        </header>
+
+        <main class="layout-content">
+            <div class="map-panel">
+                <div class="map-panel-header">
+                    <h2 class="map-panel-title">Map View</h2>
+                </div>
+                <div id="map-left" class="map-container"></div>
+                <div class="map-controls">
+                    <button class="map-control-button" id="sync-maps">🔗 Sync Views</button>
+                    <button class="map-control-button" id="reset-left">↺ Reset</button>
+                </div>
+            </div>
+
+            <div class="map-panel">
+                <div class="map-panel-header">
+                    <h2 class="map-panel-title">Comparison View</h2>
+                </div>
+                <div id="map-right" class="map-container"></div>
+                <div class="map-controls">
+                    <button class="map-control-button" id="swap-views">⇄ Swap</button>
+                    <button class="map-control-button" id="reset-right">↺ Reset</button>
+                </div>
+                <div class="sync-badge" style="display: none;" id="sync-indicator">SYNCED</div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
